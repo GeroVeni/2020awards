@@ -23,6 +23,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
     <script src="firebase-initialise.js"></script>
+    <script src="config.js"></script>
 
     <script>
         function onGoogleSignin() {
@@ -40,7 +41,7 @@
             // The signed-in user info.
             var user = result.user;
             if (user) {
-                location.href = '/';
+                location.href = `${ROOT}/`;
             }
         }).catch(function (error) {
             // Handle Errors here.
