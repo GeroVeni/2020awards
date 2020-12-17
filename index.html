@@ -2,39 +2,166 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Calp</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Calp</title>
 
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="main.css">
-    <script src="https://kit.fontawesome.com/e3dc82e272.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="main.css">
+  <script src="https://kit.fontawesome.com/e3dc82e272.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class="w3-bar surface">
-        <span class="w3-bar-item">Hey, George</span>
-        <a class="w3-bar-item w3-right"><i class="fas fa-sign-in-alt"></i></a>
-    </div>
-    <div class="w3-center">
-        <h1 style="margin:auto">2020 Nobel awards</h1>
-        <div class="w3-container" id="card-list">
-            <div class="w3-container surface">
-                <h3>Best idea award</h3>
-                <img src="images/alex.jpg" class="small selectable" alt="Alex">
-                <img src="images/george.jpg" class="small selectable" alt="George">
-                <img src="images/helen.jpg" class="small selectable" alt="Helen">
-                <img src="images/john.jpg" class="small selectable" alt="John">
-                <img src="images/bill.jpg" class="small selectable" alt="Bill">
-                <p></p>
-            </div>
-        </div>
-    </div>
+  <div class="w3-bar surface">
+    <span class="w3-bar-item" id="header-greeting"></span>
+    <a class="w3-bar-item w3-button w3-right" onclick="logout()"><i class="fas fa-sign-in-alt"></i></a>
+  </div>
+  <div class="w3-center">
+    <h1 style="margin:auto">2020 Nobel awards</h1>
+    <div class="w3-container" id="card-list">
+      <div class="surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
+      <div class="w3-container surface card">
+        <h3>Best idea award</h3>
+        <img src="images/alex.jpg" class="small selectable" alt="Alex">
+        <img src="images/george.jpg" class="small selectable" alt="George">
+        <img src="images/helen.jpg" class="small selectable" alt="Helen">
+        <img src="images/john.jpg" class="small selectable" alt="John">
+        <img src="images/bill.jpg" class="small selectable" alt="Bill">
+        <p></p>
+      </div>
 
-    <!-- Firebase stuff -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
-    <script src="firebase-initialise.js"></script>
+    </div>
+    <a class="w3-button w3-green w3-round" style="margin-bottom: 16px">Submit votes</a>
+  </div>
+
+  <!-- Firebase stuff -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+  <script src="firebase-initialise.js"></script>
+
+  <script>
+    let headerGreeting = document.getElementById('header-greeting');
+
+    function loadVotingList(token) {
+      fetch("https://gv281.user.srcf.net/meditatii/api/subjects")
+        .then(response => response.json())
+        .then(result => console.log(result));
+    }
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User signed in
+        console.log(user);
+        headerGreeting.textContent = `Hey, ${user.displayName}!`;
+        user.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+          loadVotingList(idToken);
+        }).catch(function (error) {
+          // Handle error
+          console.log(`Could not retrieve id token from user: ${error}`);
+          console.log(user);
+        });
+      } else {
+        // No user signed in
+        location.href = "/signin.html";
+      }
+    });
+
+    function logout() {
+      firebase.auth().signOut().then(function () {
+        console.log("Signout successful");
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  </script>
 </body>
 
 </html>

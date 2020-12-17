@@ -15,9 +15,8 @@
     <div class="w3-center">
         <h1 style="margin:auto">2020 Nobel awards</h1>
         <p></p>
-        <h5>In order to proceed</h5>
+        <h5 style="margin-top:128px;">In order to proceed</h5>
         <img class="google-signin" onclick="onGoogleSignin()">
-        <button class="w3-button w3-blue" onclick="logout()">Log out</button>
     </div>
 
     <!-- Firebase stuff -->
@@ -32,14 +31,6 @@
             firebase.auth().signInWithRedirect(provider);
         }
 
-        function logout() {
-            firebase.auth().signOut().then(function () {
-                console.log("Signout successful");
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
-
         firebase.auth().getRedirectResult().then(function (result) {
             if (result.credential) {
                 // This gives you a Google Access Token. You can use it to access the Google API.
@@ -48,7 +39,9 @@
             }
             // The signed-in user info.
             var user = result.user;
-            console.log(user);
+            if (user) {
+                location.href = '/';
+            }
         }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
