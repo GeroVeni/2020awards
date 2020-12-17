@@ -1,0 +1,45 @@
+body {
+    background-color: #121212;
+    color: white
+}
+
+.surface {
+    background-color: #242424;
+    border-radius: 10px;
+}
+
+img.small {
+    width: 14vw;
+    height: 14vw;
+    object-fit: cover;
+}
+
+img.selectable {
+    border-radius: 50%;
+    filter: grayscale(100%);
+}
+
+img.selectable:hover {
+    filter: grayscale(0%);
+    border: 5px solid #666;
+}
+
+img.selected {
+    filter: grayscale(0%);
+}
+
+img.google-signin {
+    content: url("images/btn_google_signin_light_normal_web.png");
+}
+
+img.google-signin:disabled {
+    content: url("images/btn_google_signin_light_disabled_web.png");
+}
+
+img.google-signin:focus {
+    content: url("images/btn_google_signin_light_focus_web.png");
+}
+
+img.google-signin:active {
+    content: url("images/btn_google_signin_light_pressed_web.png");
+}

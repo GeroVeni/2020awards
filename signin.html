@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Calp - Sign in</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://kit.fontawesome.com/e3dc82e272.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="w3-center">
+        <h1 style="margin:auto">2020 Nobel awards</h1>
+        <p></p>
+        <h5>In order to proceed</h5>
+        <img class="google-signin" onclick="onGoogleSignin()">
+        <button class="w3-button w3-blue" onclick="logout()">Log out</button>
+    </div>
+
+    <!-- Firebase stuff -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+    <script src="firebase-initialise.js"></script>
+
+    <script>
+        function onGoogleSignin() {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            //provider.addScope('profile');
+            firebase.auth().signInWithRedirect(provider);
+        }
+
+        function logout() {
+            firebase.auth().signOut().then(function () {
+                console.log("Signout successful");
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+
+        firebase.auth().getRedirectResult().then(function (result) {
+            if (result.credential) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // ...
+            }
+            // The signed-in user info.
+            var user = result.user;
+            console.log(user);
+        }).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            console.log(`${errorCode}: ${errorMessage}. Info email: ${email}, credential ${credential}`);
+        });
+    </script>
+</body>
+
+</html>
