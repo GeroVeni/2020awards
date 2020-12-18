@@ -16,109 +16,13 @@
     <span class="w3-bar-item" id="header-greeting"></span>
     <a class="w3-bar-item w3-button w3-right" onclick="logout()"><i class="fas fa-sign-in-alt"></i></a>
   </div>
-  <div class="w3-center">
+  <div class="w3-center" style="max-width: 600px; margin: auto;">
     <h1 style="margin:auto">2020 Nobel awards</h1>
-    <div class="w3-container" id="card-list">
-      <div class="surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-      <div class="w3-container surface card">
-        <h3>Best idea award</h3>
-        <img src="images/alex.jpg" class="small selectable" alt="Alex">
-        <img src="images/george.jpg" class="small selectable" alt="George">
-        <img src="images/helen.jpg" class="small selectable" alt="Helen">
-        <img src="images/john.jpg" class="small selectable" alt="John">
-        <img src="images/bill.jpg" class="small selectable" alt="Bill">
-        <p></p>
-      </div>
-
+    <div class="w3-margin w3-border w3-border-gray">
+      <h3>Voting closes in</h3>
+      <h1 id="time-remaining">?d ?h ?m ?s</h1>
     </div>
+    <div class="w3-container" id="card-list"></div>
     <a class="w3-button w3-green w3-round" style="margin-bottom: 16px">Submit votes</a>
   </div>
 
@@ -127,12 +31,54 @@
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
   <script src="firebase-initialise.js"></script>
   <script src="config.js"></script>
+  <script src="lists.js"></script>
 
   <script>
+    let categoryTemplate =
+      '<div class="surface card">' +
+        '<h3>{name}</h3>' +
+        '<img src="images/alex.jpg" class="small selectable" alt="Alex">' +
+        '<img src="images/george.jpg" class="small selectable" alt="George">' +
+        '<img src="images/helen.jpg" class="small selectable" alt="Helen">' +
+        '<img src="images/john.jpg" class="small selectable" alt="John">' +
+        '<img src="images/bill.jpg" class="small selectable" alt="Bill">' +
+      '</div>';
     let headerGreeting = document.getElementById('header-greeting');
+    let cardList = document.getElementById('card-list');
+
+    function fillCategories(categories) {
+      cardList.innerHTML = "";
+      categories.forEach(cat => {
+        console.log(cat.name)
+        const data = {
+          name: cat.name
+        };
+        cardList.appendChild(makeItem(categoryTemplate, data));
+      });
+    }
+
+    function loadCategories() {
+      fetch('https://gv281.user.srcf.net/2020awards/api/categories')
+      .then(response => response.json())
+      .then(result => fillCategories(result));
+    }
+    loadCategories();
 
     function loadVotingList(token) {
-      fetch("https://gv281.user.srcf.net/meditatii/api/subjects")
+      console.log(token);
+      let data = {
+        token: token
+      };
+      fetch('https://gv281.user.srcf.net/2020awards/api/votes', {
+        method: 'POST',
+        mode: 'cors', // no-cors, *cors, same-origin
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+      })
         .then(response => response.json())
         .then(result => console.log(result));
     }
@@ -162,6 +108,40 @@
         console.log(error);
       });
     }
+
+    // Set the date we're counting down to
+    var countDownDate = new Date("Jan 1, 2021 00:00:00 UTC+02:00").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+      // Get today's date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="demo"
+      document.getElementById("time-remaining").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+      let color = "white";
+      if (distance < 1000 * 60 * 60 * 24 * 7) color = "orange";
+      if (distance < 1000 * 60 * 60 * 24) color = "tomato";
+      document.getElementById("time-remaining").style.color = color;
+
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("time-remaining").innerHTML = "Voting has closed!";
+      }
+    }, 1000);
   </script>
 </body>
 

@@ -10,6 +10,7 @@ body {
 .card {
     border-radius: 8px;
     padding-bottom: 8px;
+    margin: auto;
     margin-bottom: 16px;
 }
 
@@ -17,6 +18,9 @@ img.small {
     width: 14vw;
     height: 14vw;
     object-fit: cover;
+    margin: 4px;
+    max-height: 90px;
+    max-width: 90px;
 }
 
 img.selectable {
@@ -26,7 +30,7 @@ img.selectable {
 
 img.selectable:hover {
     filter: grayscale(0%);
-    border: 5px solid #666;
+    border: 5px solid #4caf50;
 }
 
 img.selected {
