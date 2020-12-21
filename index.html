@@ -4,7 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Calp</title>
+  <title>Ακάμπανα βραβεία 2020</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="images/oscar.png">
+  <link rel="stylesheet" href="">
 
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="main.css">
@@ -35,7 +39,7 @@
 
   <script>
     let categoryTemplate =
-      '<div class="surface card">' +
+      '<div class="surface card" id="category-{card-id}" onclick="openCategoryDetails({card-id})">' +
         '<h3>{name}</h3>' +
         '<img src="images/alex.jpg" class="small selectable" alt="Alex">' +
         '<img src="images/george.jpg" class="small selectable" alt="George">' +
@@ -51,23 +55,24 @@
       categories.forEach(cat => {
         console.log(cat.name)
         const data = {
+          'card-id': cat.id,
           name: cat.name
         };
         cardList.appendChild(makeItem(categoryTemplate, data));
       });
     }
 
-    function loadCategories() {
-      fetch('https://gv281.user.srcf.net/2020awards/api/categories')
-      .then(response => response.json())
-      .then(result => fillCategories(result));
-    }
-    loadCategories();
+    // This is how to prevent events from propagating
+    // function test(evt) {evt.stopPropagation();}
 
-    function loadVotingList(token) {
-      console.log(token);
-      let data = {
-        token: token
+    function openCategoryDetails(cardID) {
+      console.log('clicked ' + cardID);
+    }
+
+    function submitVotes(token, votes) {
+      const data = {
+        token: token,
+        votes: votes
       };
       fetch('https://gv281.user.srcf.net/2020awards/api/votes', {
         method: 'POST',
@@ -79,15 +84,34 @@
         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
         body: JSON.stringify(data) // body data type must match "Content-Type" header
       })
+    }
+
+    function loadCategories() {
+      fetch('https://gv281.user.srcf.net/2020awards/api/categories')
+      .then(response => response.json())
+      .then(result => fillCategories(result));
+    }
+    loadCategories();
+
+    function loadVotingList(token) {
+      console.log(token);
+      fetch(`https://gv281.user.srcf.net/2020awards/api/votes?token=${token}`)
         .then(response => response.json())
-        .then(result => console.log(result));
+        .then(result => {
+          let votes = result.content;
+          console.log(votes);
+          for (key in votes) {
+            let card = document.getElementById('category-' + key);
+            card.children[parseInt(votes[key])].classList.add('selected');
+          }
+        });
     }
 
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // User signed in
         console.log(user);
-        headerGreeting.textContent = `Hey, ${user.displayName}!`;
+        headerGreeting.textContent = `How you doin', ${user.displayName}!`;
         user.getIdToken(/* forceRefresh */ true).then(function (idToken) {
           loadVotingList(idToken);
         }).catch(function (error) {
