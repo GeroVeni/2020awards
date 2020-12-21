@@ -30,10 +30,10 @@ img.selectable {
 
 img.selectable:hover {
     filter: grayscale(0%);
-    border: 5px solid #4caf50;
+    border: 5px solid #bf9b5f;
 }
 
-img.selected {
+img.selectable.selected {
     filter: grayscale(0%);
 }
 
