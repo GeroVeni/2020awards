@@ -5,9 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ακάμπανα βραβεία 2020</title>
-  <link rel="icon" 
-      type="image/png" 
-      href="images/oscar.png">
+  <link rel="icon" type="image/png" href="images/oscar.png">
   <link rel="stylesheet" href="">
 
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -16,18 +14,43 @@
 </head>
 
 <body>
+  <!-- The Modal -->
+  <div id="details-modal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="modal-title"></h3>
+      <p id="modal-details"></p>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="audio" autoplay loop>
+    <source src="audio/lounge.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <!-- The main body -->
   <div class="w3-bar surface">
     <span class="w3-bar-item" id="header-greeting"></span>
     <a class="w3-bar-item w3-button w3-right" onclick="logout()"><i class="fas fa-sign-in-alt"></i></a>
   </div>
-  <div class="w3-center" style="max-width: 600px; margin: auto;">
-    <h1 style="margin:auto">2020 Nobel awards</h1>
-    <div class="w3-margin w3-border w3-border-gray">
-      <h3>Voting closes in</h3>
+  <div class="center" style="max-width: 600px; margin: auto;">
+    <div class="w3-row">
+      <div class="w3-col s6">
+        <div class="primary" style="margin:auto; font-size: 48pt; vertical-align: top;">2020</div>
+      </div>
+      <div class="w3-col s6">
+        <div class="primary" style="text-align: left; font-size: 16pt; vertical-align: top;">ΤΑ ΑΚΑΜΠΑΝΑ</div>
+        <div class="secondary" style="text-align: left; font-size: 16pt;">ΒΡΑΒΕΙΑ</div>
+      </div>
+    </div>
+    <div class="w3-margin border border-primary">
+      <h3 class="primary">ΨΗΦΙΣΤΕ ΓΙΑΤΙ ΧΑΝΟΜΑΣΤΕ</h3>
       <h1 id="time-remaining">?d ?h ?m ?s</h1>
     </div>
     <div class="w3-container" id="card-list"></div>
-    <a class="w3-button w3-green w3-round" style="margin-bottom: 16px">Submit votes</a>
+    <a class="w3-button w3-green w3-round" onclick="onSubmitVotesClicked()" style="margin-bottom: 16px">Submit votes</a>
   </div>
 
   <!-- Firebase stuff -->
@@ -38,35 +61,72 @@
   <script src="lists.js"></script>
 
   <script>
+    document.getElementById("audio").volume = 0.15;
+
     let categoryTemplate =
-      '<div class="surface card" id="category-{card-id}" onclick="openCategoryDetails({card-id})">' +
-        '<h3>{name}</h3>' +
-        '<img src="images/alex.jpg" class="small selectable" alt="Alex">' +
-        '<img src="images/george.jpg" class="small selectable" alt="George">' +
-        '<img src="images/helen.jpg" class="small selectable" alt="Helen">' +
-        '<img src="images/john.jpg" class="small selectable" alt="John">' +
-        '<img src="images/bill.jpg" class="small selectable" alt="Bill">' +
+      '<div class="surface card" id="category-{card-id}">' +
+        '<div class="w3-row">' +
+          '<div class="w3-col s6">' +
+            '<h3>{name}</h3>' +
+          '</div>' +
+          '<div class="w3-col s6">' +
+            '<p>{description}</p>' +
+          '</div>' +
+        '</div>' +
+        '<img src="images/alex.jpg" class="small selectable" onclick="selectVote(event, \'category-{card-id}\', \'1\')" alt="Alex">' +
+        '<img src="images/george.jpg" class="small selectable" onclick="selectVote(event, \'category-{card-id}\', \'2\')" alt="George">' +
+        '<img src="images/helen.jpg" class="small selectable" onclick="selectVote(event, \'category-{card-id}\', \'3\')" alt="Helen">' +
+        '<img src="images/john.jpg" class="small selectable" onclick="selectVote(event, \'category-{card-id}\', \'4\')" alt="John">' +
+        '<img src="images/bill.jpg" class="small selectable" onclick="selectVote(event, \'category-{card-id}\', \'5\')" alt="Bill">' +
       '</div>';
     let headerGreeting = document.getElementById('header-greeting');
     let cardList = document.getElementById('card-list');
+    let categoriesCache = {};
+    
+    let modal = document.getElementById("details-modal");
+    let modalTitle = document.getElementById("modal-title");
+    let modalDetails = document.getElementById("modal-details");
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
 
     function fillCategories(categories) {
+      categoriesCache = categories;
       cardList.innerHTML = "";
+      console.log(categories);
       categories.forEach(cat => {
-        console.log(cat.name)
         const data = {
           'card-id': cat.id,
-          name: cat.name
+          name: cat.name,
+          description: cat.description
         };
         cardList.appendChild(makeItem(categoryTemplate, data));
       });
     }
 
-    // This is how to prevent events from propagating
-    // function test(evt) {evt.stopPropagation();}
-
     function openCategoryDetails(cardID) {
       console.log('clicked ' + cardID);
+      modal.style.display = "block";
+      let cat = {};
+      for (k in categoriesCache) {
+        if (categoriesCache[k].id == cardID) {
+          cat = categoriesCache[k];
+          break;
+        }
+      }
+      modalTitle.innerHTML = cat.name;
+      modalDetails.innerHTML = cat.description;
     }
 
     function submitVotes(token, votes) {
@@ -84,12 +144,51 @@
         referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
         body: JSON.stringify(data) // body data type must match "Content-Type" header
       })
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(error => console.error(error));
+    }
+
+    function selectVote(event, cardID, candidate) {
+      event.stopPropagation();
+      console.log('selected: ' + cardID + ' ' + candidate);
+      if (getUserIDFromEmail(firebase.auth().currentUser.email) == candidate) return;
+      let card = document.getElementById(cardID);
+      for (let i = 0; i < card.children.length; i++) {
+        if (parseInt(candidate) == i) {
+          card.children[i].classList.add('selected');
+        } else {
+          card.children[i].classList.remove('selected');
+        }
+      }
+    }
+
+    function onSubmitVotesClicked() {
+      firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+        .then(function (idToken) {
+          let votes = {};
+          for (let i = 0; i < cardList.children.length; i++) {
+            let card = cardList.children[i];
+            let categoryID = card.id.split('-')[1];
+            for (let j = 0; j < card.children.length; j++) {
+              let item = card.children[j];
+              if (item.classList.contains('selected')) {
+                votes[categoryID] = '' + j;
+                break;
+              }
+            }
+          }
+          console.log('sending votes');
+          console.log(votes);
+          submitVotes(idToken, votes);
+        })
+        .catch(error => console.error(error));
     }
 
     function loadCategories() {
       fetch('https://gv281.user.srcf.net/2020awards/api/categories')
-      .then(response => response.json())
-      .then(result => fillCategories(result));
+        .then(response => response.json())
+        .then(result => fillCategories(result));
     }
     loadCategories();
 
@@ -107,10 +206,18 @@
         });
     }
 
+    function getUserIDFromEmail(email) {
+      if (email == 'alexlik1997@gmail.com') return '1';
+      if (email == 'geroveni@gmail.com') return '2';
+      if (email == 'evieleni99@gmail.com') return '3';
+      if (email == 'johnv12345678@gmail.com') return '4';
+      if (email == 'billdolop@gmail.com') return '5';
+      return '0';
+    }
+
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // User signed in
-        console.log(user);
         headerGreeting.textContent = `How you doin', ${user.displayName}!`;
         user.getIdToken(/* forceRefresh */ true).then(function (idToken) {
           loadVotingList(idToken);
@@ -129,7 +236,7 @@
       firebase.auth().signOut().then(function () {
         console.log("Signout successful");
       }).catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
     }
 

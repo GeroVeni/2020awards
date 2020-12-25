@@ -1,54 +1,112 @@
 body {
-    background-color: #121212;
-    color: white
+  background-color: #121212;
+  color: white
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+/* Modal Content/Box */
+.modal-content {
+  background-color: #242424;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+  
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .surface {
-    background-color: #242424;
+  background-color: #242424;
+}
+
+.primary {
+  color: #bf9b5f;
+}
+
+.border {
+  border: 2px solid #ccc;
+}
+
+.border-primary {
+  border-color: #bf9b5f;
+}
+
+.secondary {
+  color: #a9a8a9 !important;
+}
+
+.center {
+  text-align: center;
 }
 
 .card {
-    border-radius: 8px;
-    padding-bottom: 8px;
-    margin: auto;
-    margin-bottom: 16px;
+  border-radius: 8px;
+  padding-bottom: 8px;
+  margin: auto;
+  margin-bottom: 16px;
 }
 
 img.small {
-    width: 14vw;
-    height: 14vw;
-    object-fit: cover;
-    margin: 4px;
-    max-height: 90px;
-    max-width: 90px;
+  width: 14vw;
+  height: 14vw;
+  object-fit: cover;
+  margin: 4px;
+  max-height: 90px;
+  max-width: 90px;
 }
 
 img.selectable {
-    border-radius: 50%;
-    filter: grayscale(100%);
+  border-radius: 50%;
+  filter: grayscale(100%);
 }
 
 img.selectable:hover {
-    filter: grayscale(0%);
-    border: 5px solid #bf9b5f;
+  filter: grayscale(0%);
+  border: 5px solid #bf9b5f;
 }
 
 img.selectable.selected {
-    filter: grayscale(0%);
+  filter: grayscale(0%);
 }
 
 img.google-signin {
-    content: url("images/btn_google_signin_light_normal_web.png");
+  content: url("images/btn_google_signin_light_normal_web.png");
 }
 
 img.google-signin:disabled {
-    content: url("images/btn_google_signin_light_disabled_web.png");
+  content: url("images/btn_google_signin_light_disabled_web.png");
 }
 
 img.google-signin:focus {
-    content: url("images/btn_google_signin_light_focus_web.png");
+  content: url("images/btn_google_signin_light_focus_web.png");
 }
 
 img.google-signin:active {
-    content: url("images/btn_google_signin_light_pressed_web.png");
+  content: url("images/btn_google_signin_light_pressed_web.png");
 }
