@@ -93,6 +93,16 @@ img.selectable:hover {
 
 img.selectable.selected {
   filter: grayscale(0%);
+  border: 8px solid #bf9b5f;
+}
+
+img.selectable.disabled {
+  filter: grayscale(0%);
+  opacity: 0.3;
+}
+
+img.selectable.disabled:hover {
+  border: none;
 }
 
 img.google-signin {

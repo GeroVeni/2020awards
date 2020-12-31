@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ακάμπανα βραβεία 2020</title>
+  <link rel="icon" type="image/png" href="images/oscar.png">
+  <link rel="stylesheet" href="">
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="main.css">
+  <script src="https://kit.fontawesome.com/e3dc82e272.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- The main body -->
+  <!-- <div class="w3-bar surface">
+    <span class="w3-bar-item" id="header-greeting"></span>
+    <a class="w3-bar-item w3-button w3-right" onclick="logout()"><i class="fas fa-sign-in-alt"></i></a>
+  </div> -->
+  <div class="center" style="max-width: 600px; margin: auto;">
+    <div class="w3-row">
+      <div class="w3-col s6">
+        <div class="primary" style="margin:auto; font-size: 48pt; vertical-align: top;">2020</div>
+      </div>
+      <div class="w3-col s6" style="padding-top: 20px;">
+        <div class="primary" style="text-align: left; font-size: 16pt; vertical-align: top;">ΤΑ ΑΚΑΜΠΑΝΑ</div>
+        <div class="secondary" style="text-align: left; font-size: 16pt;">ΒΡΑΒΕΙΑ</div>
+      </div>
+    </div>
+    <div class="w3-container" id="results-list"></div>
+  </div>
+
+  <!-- Firebase stuff -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+  <script src="firebase-initialise.js"></script>
+  <script src="config.js"></script>
+  <script src="lists.js"></script>
+
+  <script>
+    let categories = {};
+
+    let resultsList = document.getElementById('results-list');
+
+    let catTemp =
+    '<div class="surface card" id="category-{card-id}">' +
+      '<h3>{name}</h3>' +
+      '<p>{result}</p>' +
+    '</div>';
+
+    function getCategoryName(catID) {
+      for (key in categories) {
+        if (categories[key].id == catID) return categories[key].name;
+      }
+      return "";
+    }
+
+    function getPersonName(personID) {
+      if (personID == "1") return 'Άλεξ';
+      if (personID == "2") return 'Γιώργος';
+      if (personID == "3") return 'Ελένη';
+      if (personID == "4") return 'Γιάννης';
+      if (personID == "5") return 'Βασίλης';
+    }
+
+    function getName(personID) {
+      let ans = {};
+      for (id in personID) {
+        ans[getPersonName(id)] = personID[id];
+      }
+      return JSON.stringify(ans);
+    }
+
+    fetch('https://gv281.user.srcf.net/2020awards/api/categories')
+      .then(response => response.json())
+      .then(result => {
+        categories = result;
+        console.log(result);
+      })
+      .then(() => fetch('https://gv281.user.srcf.net/2020awards/api/results'))
+      .then(response => response.json())
+      .then(result => {
+        resultsList.innerHTML = "";
+        for (catID in result.categories) {
+          console.log(getCategoryName(catID));
+          console.log(result.categories[catID]);
+          let data = {
+            "card-id": catID,
+            name: getCategoryName(catID),
+            result: getName(result.categories[catID])
+          }
+          resultsList.appendChild(makeItem(catTemp, data));
+        }
+      })
+      .catch(error => console.log(error));
+  </script>
+</body>
+
+</html>
