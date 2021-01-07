@@ -72,6 +72,21 @@ body {
   margin-bottom: 16px;
 }
 
+.comment-box {
+  border-radius: 8px;
+  border: 3px solid #bf9b5f;
+  background-color: black;
+  font-weight: bold;
+  padding: 2px 6px;
+  width: 100%;
+  color: white;
+  resize: vertical;
+
+  /* box-sizing: padding-box; */
+  overflow:hidden;
+  display:block;
+}
+
 img.small {
   width: 14vw;
   height: 14vw;

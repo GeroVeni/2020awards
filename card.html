@@ -1,0 +1,18 @@
+<div class="surface card" id="category-{card-id}">
+    <div class="w3-row">
+        <div class="w3-col s6 w3-padding">
+            <h3>{name}</h3>
+        </div>
+        <div class="w3-col s6 w3-padding" style="text-align: left;">
+            <p>{description}</p>
+        </div>
+    </div>
+    <img src="images/alex.jpg" class="small selectable" id="item-{card-id}-1" onclick="selectVote(event, 'category-{card-id}', '1')" alt="Alex">
+    <img src="images/george.jpg" class="small selectable" id="item-{card-id}-2" onclick="selectVote(event, 'category-{card-id}', '2')" alt="George">
+    <img src="images/helen.jpg" class="small selectable" id="item-{card-id}-3" onclick="selectVote(event, 'category-{card-id}', '3')" alt="Helen">
+    <img src="images/john.jpg" class="small selectable" id="item-{card-id}-4" onclick="selectVote(event, 'category-{card-id}', '4')" alt="John">
+    <img src="images/bill.jpg" class="small selectable" id="item-{card-id}-5" onclick="selectVote(event, 'category-{card-id}', '5')" alt="Bill">
+    <div style="padding:16px;">
+        <textarea name="comment" class="comment-box" id="comment-{card-id}" placeholder="'ξηγήσου..." rows="1" oninput="auto_grow(this)"></textarea>
+    </div>
+</div>

@@ -5,22 +5,12 @@ function colorchange(event) {
 
 document.getElementById("audio").volume = 0.15;
 
-let categoryTemplate =
-    '<div class="surface card" id="category-{card-id}">' +
-    '<div class="w3-row">' +
-    '<div class="w3-col s6">' +
-    '<h3>{name}</h3>' +
-    '</div>' +
-    '<div class="w3-col s6">' +
-    '<p>{description}</p>' +
-    '</div>' +
-    '</div>' +
-    '<img src="images/alex.jpg" class="small selectable" onclick="selectVote(event, \'category-{card-id}\', \'1\')" alt="Alex">' +
-    '<img src="images/george.jpg" class="small selectable disabled" onclick="selectVote(event, \'category-{card-id}\', \'2\')" alt="George">' +
-    '<img src="images/helen.jpg" class="small selectable" onclick="selectVote(event, \'category-{card-id}\', \'3\')" alt="Helen">' +
-    '<img src="images/john.jpg" class="small selectable" onclick="selectVote(event, \'category-{card-id}\', \'4\')" alt="John">' +
-    '<img src="images/bill.jpg" class="small selectable" onclick="selectVote(event, \'category-{card-id}\', \'5\')" alt="Bill">' +
-    '</div>';
+let categoryTemplate = "";
+
+async function loadTemplates() {
+    categoryTemplate = await fetch('card.html').then(res => res.text());
+}
+
 let headerGreeting = document.getElementById('header-greeting');
 let cardList = document.getElementById('card-list');
 let categoriesCache = {};
@@ -43,7 +33,12 @@ window.onclick = function (event) {
     }
 }
 
-function fillCategories(categories) {
+function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+}
+
+function fillCategories(categories, userEmail) {
     categoriesCache = categories;
     cardList.innerHTML = "";
     console.log(categories);
@@ -54,6 +49,7 @@ function fillCategories(categories) {
             description: cat.description
         };
         cardList.appendChild(makeItem(categoryTemplate, data));
+        document.getElementById(`item-${cat.id}-${getUserIDFromEmail(userEmail)}`).classList.add('disabled');
     });
 }
 
@@ -93,8 +89,8 @@ function submitVotes(token, votes) {
 
 function selectVote(event, cardID, candidate) {
     event.stopPropagation();
-    console.log('selected: ' + cardID + ' ' + candidate);
     if (getUserIDFromEmail(firebase.auth().currentUser.email) == candidate) return;
+    console.log('selected: ' + cardID + ' ' + candidate);
     let card = document.getElementById(cardID);
     for (let i = 0; i < card.children.length; i++) {
         if (parseInt(candidate) == i) {
@@ -115,9 +111,14 @@ function onSubmitVotesClicked() {
                 for (let j = 0; j < card.children.length; j++) {
                     let item = card.children[j];
                     if (item.classList.contains('selected')) {
-                        votes[categoryID] = '' + j;
+                        votes[categoryID] = {
+                            vote: '' + j
+                        };
                         break;
                     }
+                }
+                if (categoryID in votes) {
+                    votes[categoryID].comment = document.getElementById(`comment-${categoryID}`).value;
                 }
             }
             console.log('sending votes');
@@ -127,12 +128,12 @@ function onSubmitVotesClicked() {
         .catch(error => console.error(error));
 }
 
-function loadCategories() {
-    fetch('https://gv281.user.srcf.net/2020awards/api/categories')
+function loadCategories(userEmail) {
+    loadTemplates()
+        .then(() => fetch('https://gv281.user.srcf.net/2020awards/api/categories'))
         .then(response => response.json())
-        .then(result => fillCategories(result));
+        .then(result => fillCategories(result, userEmail));
 }
-loadCategories();
 
 function loadVotingList(token) {
     console.log(token);
@@ -142,8 +143,10 @@ function loadVotingList(token) {
             let votes = result.content;
             console.log(votes);
             for (key in votes) {
-                let card = document.getElementById('category-' + key);
-                card.children[parseInt(votes[key])].classList.add('selected');
+                let card = document.getElementById(`category-${key}`);
+                card.children[parseInt(votes[key].vote)].classList.add('selected');
+                let commentBox = document.getElementById(`comment-${key}`);
+                commentBox.value = votes[key].comment;
             }
         });
 }
@@ -161,6 +164,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User signed in
         headerGreeting.textContent = `How you doin', ${user.displayName}!`;
+        loadCategories(user.email);
         user.getIdToken(/* forceRefresh */ true).then(function (idToken) {
             loadVotingList(idToken);
         }).catch(function (error) {
@@ -183,7 +187,7 @@ function logout() {
 }
 
 // Set the date we're counting down to
-var countDownDate = new Date("Jan 1, 2021 04:00:00 UTC+02:00").getTime();
+var countDownDate = new Date("Jan 8, 2021 01:00:00 UTC+02:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function () {
